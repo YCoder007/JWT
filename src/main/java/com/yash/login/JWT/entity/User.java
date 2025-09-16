@@ -20,7 +20,10 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Table(name = "APP_USER")
 public class User  implements UserDetails {

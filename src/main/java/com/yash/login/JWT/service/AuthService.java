@@ -11,16 +11,18 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 @Data
-public class AuthService {
+public class AuthService  {
 
     private final AuthenticationManager authenticationManager;
     private final AuthUtil authUtil;
     private final UserRepo userRepo;
+    private final PasswordEncoder passwordEncoder;
 
 
     public LoginResponseDTO login(LoginRequestDTO loginRequestDTO) {
@@ -45,8 +47,9 @@ public class AuthService {
 
         user = userRepo.save(User.builder()
                 .username(signUpRequestDTO.getUsername())
-                .password(signUpRequestDTO.getPassword())
+                .password(passwordEncoder.encode(signUpRequestDTO.getPassword()))
                 .build());
         return new SignUpResponseDTO(user.getId(), user.getUsername());
     }
+
 }

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AuthController {
 
 
-    private  AuthService authService;
+    private final  AuthService authService;
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO){
